@@ -1,17 +1,17 @@
 {
   "author":"BuildFire"
-,"pluginName":"mediaPlayerPlugin"
-,"pluginDescription":"Media Player Plugin"
-,"supportEmail":"[Your support Email]"
+,"pluginName":"Audio Media Player"
+,"pluginDescription":"Couple the Media Player with your Media Center to let your users create playlists to have an amasing, modern listening experience."
+,"supportEmail":"support@buildfire.com"
 ,"control":{
   "content":{
     "enabled":true
   }
 , "design":{
-    "enabled":true
+    "enabled":false
   }
 , "settings":{
-    "enabled":true
+    "enabled":false
   }
 }
 ,"widget":{
