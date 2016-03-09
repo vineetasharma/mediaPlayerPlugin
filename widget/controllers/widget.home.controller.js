@@ -60,14 +60,8 @@
                  */
                 WidgetHome.playTrack = function () {
                     WidgetHome.showTrackSlider = true;
-                    console.log('Widget HOme url----------------------', WidgetHome.currentTrack.stream_url + '?client_id=' + WidgetHome.info.data.content.soundcloudClientID);
                     WidgetHome.playing = true;
                     WidgetHome.currentTrack.isPlaying = true;
-                    WidgetHome.tracks.forEach(function (track) {
-                        if (track.id != WidgetHome.currentTrack.id) {
-                            track.isPlaying = false;
-                        }
-                    });
                     if (WidgetHome.paused) {
                         audioPlayer.play();
                     } else {
@@ -145,21 +139,20 @@
                     }
                     audioPlayer.settings.set(WidgetHome.settings);
                 };
-                WidgetHome.addToPlaylist = function (track) {
+                WidgetHome.addToPlaylist = function () {
                     console.log('AddToPlaylist called-------------------------------');
-                    var playListTrack = new Track(track.title, track.stream_url + '?client_id=' + WidgetHome.info.data.content.soundcloudClientID, track.artwork_url, track.tag_list, track.user.username);
-                    audioPlayer.addToPlaylist(playListTrack);
+                    audioPlayer.addToPlaylist(WidgetHome.currentTrack);
                 };
                 WidgetHome.removeFromPlaylist = function (track) {
                     console.log('removeFromPlaylist called-------------------------------');
                     if (WidgetHome.playList) {
                         var trackIndex = 0;
                         WidgetHome.playList.some(function (val, index) {
-                            if (((val.url == track.stream_url + '?client_id=' + WidgetHome.info.data.content.soundcloudClientID) || val.url == track.url) && (trackIndex == 0)) {
+                            if ((val.url == track.url) && (trackIndex == 0)) {
                                 audioPlayer.removeFromPlaylist(index);
                                 trackIndex++;
                             }
-                            return ((val.url == track.stream_url + '?client_id=' + WidgetHome.info.data.content.soundcloudClientID) || val.url == track.url);
+                            return (val.url == track.url);
 
                         });
                         console.log('indexes------------track Index----------------------track==========', trackIndex);
@@ -224,27 +217,6 @@
                 WidgetHome.closeMoreInfoOverlay = function () {
                     WidgetHome.openMoreInfo = false;
                 };
-
-                /*  $scope.$on("Carousel:LOADED", function () {
-                 if (!WidgetHome.view) {
-                 WidgetHome.view = new window.buildfire.components.carousel.view("#carousel", []);  ///create new instance of buildfire carousel viewer
-                 }
-                 if (WidgetHome.view && WidgetHome.info && WidgetHome.info.data) {
-                 WidgetHome.initCarousel();
-                 }
-                 else {
-                 WidgetHome.view.loadItems([]);
-                 }
-                 });*/
-
-                $scope.$on("destroy currentTrack", function () {
-                    WidgetHome.currentTime = null;
-                    WidgetHome.playing = false;
-                    WidgetHome.paused = false;
-                    WidgetHome.currentTrack = null;
-                    WidgetHome.duration = '';
-                    WidgetHome.showTrackSlider = false;
-                });
 
                 /**
                  * Track Smaple
