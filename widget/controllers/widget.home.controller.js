@@ -21,6 +21,7 @@
                     console.log('audioPlayer.getCurrentTrack method called--------------------------------',track,err);
                     if(track){
                         WidgetHome.currentTrack=track;
+                        $scope.$digest();
                     }
                 });
 
@@ -65,10 +66,7 @@
                     if (WidgetHome.paused) {
                         audioPlayer.play();
                     } else {
-                        audioPlayer.play({
-                            url: WidgetHome.currentTrack.stream_url + '?client_id=' + WidgetHome.info.data.content.soundcloudClientID,
-                            title: WidgetHome.currentTrack.title
-                        });
+                        audioPlayer.play(WidgetHome.currentTrack);
                     }
                 };
                 WidgetHome.playlistPlay = function (track) {
@@ -81,21 +79,18 @@
                         track.playing = true;
                     }
                     WidgetHome.getFromPlaylist();
-//                    $scope.$digest();
                 };
                 WidgetHome.pauseTrack = function () {
                     WidgetHome.playing = false;
                     WidgetHome.paused = true;
                     WidgetHome.currentTrack.isPlaying = false;
                     audioPlayer.pause();
-//                    $scope.$digest();
                 };
                 WidgetHome.playlistPause = function (track) {
                     track.playing = false;
                     WidgetHome.playing = false;
                     WidgetHome.paused = true;
                     audioPlayer.pause();
-//                    $scope.$digest();
                 };
                 WidgetHome.forward = function () {
                     if (WidgetHome.currentTime + 5 >= WidgetHome.currentTrack.duration)
@@ -157,9 +152,6 @@
                         });
                         console.log('indexes------------track Index----------------------track==========', trackIndex);
                     }
-                    /*if(trackIndex!='undefined'){
-                     audioPlayer.removeFromPlaylist(trackIndex);
-                     }*/
                 };
                 WidgetHome.removeTrackFromPlayList = function (index) {
                     audioPlayer.removeFromPlaylist(index);
@@ -174,7 +166,6 @@
                             $scope.$digest();
                         }
                     });
-                    // }
                     WidgetHome.openMoreInfo = false;
                     WidgetHome.openPlaylist = true;
                 };
