@@ -60,7 +60,6 @@
                  * Player related method and variables
                  */
                 WidgetHome.playTrack = function () {
-                    WidgetHome.showTrackSlider = true;
                     WidgetHome.playing = true;
                     WidgetHome.currentTrack.isPlaying = true;
                     if (WidgetHome.paused) {
@@ -70,7 +69,6 @@
                     }
                 };
                 WidgetHome.playlistPlay = function (track) {
-                    WidgetHome.showTrackSlider = true;
                     WidgetHome.currentTrack = track;
                     console.log('PlayList Play ---------------Track is played', track);
                     WidgetHome.playing = true;
