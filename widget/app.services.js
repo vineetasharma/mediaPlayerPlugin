@@ -1,4 +1,4 @@
-(function (angular, buildfire, location) {
+(function (angular, buildfire) {
     'use strict';
     //created MediaPlayerWidgetServices module
     angular
@@ -8,4 +8,4 @@
                 return buildfire;
             };
         }]);
-})(window.angular, window.buildfire, window.location);
+})(window.angular, window.buildfire);
