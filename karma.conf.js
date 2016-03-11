@@ -1,7 +1,7 @@
 // Karma configuration
-// Generated on Fri Oct 09 2015 09:12:13 GMT-0700 (Pacific Daylight Time)
+// Generated on Wed Aug 12 2015 15:10:36 GMT+0530 (IST)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -15,31 +15,38 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/jquery/dist/jquery.min.js',
-      'bower_components/angular/angular.js',
-      'bower_components/angular-animate/angular-animate.min.js',
-      'bower_components/angular-route/angular-route.min.js',
-      'bower_components/angular-bootstrap/ui-bootstrap.min.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'test/assets/buildfire.js',
-      'control/content/**/*.js',
-      'widget/**/*.js',
-      'test/assets/*.js',
-      'test/**/*.js'
+      './bower_components/jquery/dist/jquery.min.js',
+      './bower_components/angular/angular.js',
+      './bower_components/angular-mocks/angular-mocks.js',
+      './bower_components/angular-animate/angular-animate.min.js',
+      './bower_components/angular-route/angular-route.min.js',
+      './bower_components/angular-bootstrap/ui-bootstrap.min.js',
+      './test/assets/buildfire.js',
+      './test/assets/audioPlayer.js',
+      './control/design/**/*.js',
+      './control/content/**/*.js',
+      './widget/**/*.js',
+      './test/**/*.js'
     ],
 
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'widget/**/!(js)/*.js': ['coverage'],
+      'widget/*.js': ['coverage']
     },
 
-
+    plugins: [
+      'karma-phantomjs-launcher',
+      'karma-jasmine',
+      'karma-junit-reporter',
+      'karma-coverage'
+    ],
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
@@ -47,9 +54,8 @@ module.exports = function(config) {
 
     coverageReporter: {
       type: 'html',
-      dir: 'test/coverage/'
+      dir: 'coverage/'
     },
-
 
     // web server port
     port: 9876,
@@ -70,7 +76,8 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: [ 'PhantomJS'],
+    browsers: ['PhantomJS'],
+
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
