@@ -221,6 +221,19 @@ describe('Unit : MediaPlayerPluginWidget Home Controller', function () {
             rootScope.$digest();
         });
     });
+    describe('Unit : playlistPlayPause method should be Defined', function () {
+        it('it should pass if playlistPlayPause is defined', function () {
+            expect(WidgetHome.playlistPlayPause).not.toBeUndefined();
+        });
+        it('it should pass if playlistPlayPause method calling', function () {
+            WidgetHome.playlistPlayPause({});
+            rootScope.$digest();
+        });
+        it('it should pass if playlistPlayPause method calling', function () {
+            WidgetHome.playlistPlayPause({playing:true});
+            rootScope.$digest();
+        });
+    });
     describe('Unit : openMoreInfoOverlay method should be Defined', function () {
         it('it should pass if addEvents method calling', function () {
             WidgetHome.openMoreInfoOverlay();

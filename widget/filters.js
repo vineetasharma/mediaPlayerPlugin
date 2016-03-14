@@ -20,16 +20,6 @@
                 });
             };
         }])
-        .filter('safeHtml', ['$sce', function ($sce) {
-            return function (html) {
-                if (html) {
-                    return $sce.trustAsHtml(html);
-                }
-                else {
-                    return "";
-                }
-            };
-        }])
         .filter('millisecondsToDateTime', [function() {
             return function(milliseconds) {
                 var seconds = milliseconds / 1000;

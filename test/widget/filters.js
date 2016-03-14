@@ -41,28 +41,6 @@ describe('Unit: cropImage filter', function () {
     });
 });
 
-describe('Unit: safeHtml filter', function () {
-    beforeEach(module('MediaPlayerPluginWidgetFilters'));
-    var filter,$sce,$scope;
-    beforeEach(inject(function (_$rootScope_,_$filter_,_$sce_) {
-        filter = _$filter_;
-        $sce=_$sce_;
-
-        $scope=_$rootScope_;
-    }));
-
-    it('safeHtml filter should returns an empty string if html value not provided', function () {
-        var result;
-        result = filter('safeHtml')(null);
-        expect(result).toEqual('');
-    });
-    it('safeHtml filter should returns an empty string if html value provided', function () {
-        var result;
-        result = filter('safeHtml')("<p>&nbsp;<br>Sandeep kumar</p>");
-        expect(typeof result).toEqual('object');
-    });
-});
-
 xdescribe('Unit: millisecondsToDateTime filter', function () {
     beforeEach(module('MediaPlayerPluginWidgetFilters'));
     var filter,$sce,$scope;
