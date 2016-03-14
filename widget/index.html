@@ -64,10 +64,13 @@
                          ng-src="{{WidgetHome.currentTrack.image | cropImage : 260:260}}">
                 </div>
             </div>
-            <div class="media-player-info margin-top-twenty padding-left-ten padding-right-ten">
+            <div class="media-player-info margin-top-twenty padding-left-ten padding-right-ten" ng-if="WidgetHome.currentTrack">
                 <h4 class="margin-zero ellipsis whiteTheme">{{WidgetHome.currentTrack.title}}</h4>
 
                 <p class="margin-zero whiteTheme ellipsis">{{WidgetHome.currentTrack.user.username}}{{WidgetHome.currentTrack.artist}}</p>
+            </div>
+            <div class="media-player-info margin-top-twenty padding-left-ten padding-right-ten" ng-if="!WidgetHome.currentTrack">
+                <h4 class="margin-zero ellipsis whiteTheme">No Audio Currently Selected</h4>
             </div>
             <div class="slider">
                 <div class="playerMP">
