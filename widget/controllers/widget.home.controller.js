@@ -25,6 +25,16 @@
                     }
                 });
 
+                audioPlayer.settings.get(function (err, data) {
+                    console.log('Got player settings first time-----------------------', err, data);
+                    if (data) {
+                        WidgetHome.settings = data;
+                        if (!$scope.$$phase) {
+                            $scope.$digest();
+                        }
+                    }
+                });
+
                 /**
                  * audioPlayer.onEvent callback calls when audioPlayer event fires.
                  */
