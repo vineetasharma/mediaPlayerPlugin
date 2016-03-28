@@ -34,7 +34,7 @@
 <body>
 <div ng-controller="WidgetHomeCtrl as WidgetHome">
     <div class="holder now-playing text-center">
-        <div ng-style="{'background':'url(' + (WidgetHome.currentTrack.artwork_url ? WidgetHome.currentTrack.artwork_url : 'assets/images/now-playing.png') + ') no-repeat center center',
+        <div ng-style="{'background':'url(' + (WidgetHome.currentTrack.image ? WidgetHome.currentTrack.image : 'assets/images/now-playing.png') + ') no-repeat center center',
          '-o-filter': 'blur(10px) brightness(0.2)',
     '-moz-filter': 'blur(10px) brightness(0.2)',
     '-webkit-filter': 'blur(10px) brightness(0.2)',
@@ -55,11 +55,9 @@
             </div>
             <div class="media-holder margin-top-fifteen">
                 <div class="media-inner text-center">
-                    <img ng-if="WidgetHome.currentTrack.artwork_url" class="border-radius-two"
-                         ng-src="{{WidgetHome.currentTrack.artwork_url | cropImage : 260:260}}">
-                    <img ng-if="(!WidgetHome.currentTrack.artwork_url) && (!WidgetHome.currentTrack.image)"
+                    <img ng-if="!WidgetHome.currentTrack.image"
                          class="border-radius-two"
-                         src="assets/images/now-playing.png">
+                         src="assets/images/now-playing.png" height="260px" width="260px">
                     <img ng-if="WidgetHome.currentTrack.image" class="border-radius-two"
                          ng-src="{{WidgetHome.currentTrack.image | cropImage : 260:260}}">
                 </div>
@@ -67,7 +65,7 @@
             <div class="media-player-info margin-top-twenty padding-left-ten padding-right-ten" ng-if="WidgetHome.currentTrack">
                 <h4 class="margin-zero ellipsis whiteTheme">{{WidgetHome.currentTrack.title}}</h4>
 
-                <p class="margin-zero whiteTheme ellipsis">{{WidgetHome.currentTrack.user.username}}{{WidgetHome.currentTrack.artist}}</p>
+                <p class="margin-zero whiteTheme ellipsis">{{WidgetHome.currentTrack.artist}}</p>
             </div>
             <div class="media-player-info margin-top-twenty padding-left-ten padding-right-ten" ng-if="!WidgetHome.currentTrack">
                 <h4 class="margin-zero ellipsis whiteTheme">No Audio Currently Selected</h4>
