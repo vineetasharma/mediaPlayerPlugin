@@ -171,6 +171,14 @@
                         console.log('Callback---------getList--------------', err, data);
                         if (data && data.tracks) {
                             WidgetHome.playList = data.tracks;
+                            if(WidgetHome.playing){
+                                WidgetHome.playList.some(function(track){
+                                    if(track.url==WidgetHome.currentTrack.url){
+                                        track.playing=true;
+                                        return true;
+                                    }
+                                });
+                            }
                             $scope.$digest();
                         }
                     });
