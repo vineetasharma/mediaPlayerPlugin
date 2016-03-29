@@ -57,7 +57,6 @@
                             WidgetHome.playing = true;
                             break;
                         case 'removeFromPlaylist':
-                            Modals.removeTrackModal();
                             WidgetHome.playList = e.data && e.data.newPlaylist && e.data.newPlaylist.tracks;
                             console.log('WidgetHome.playList---------------------in removeFromPlaylist---', WidgetHome.playList);
                             break;
@@ -147,22 +146,32 @@
                     audioPlayer.addToPlaylist(WidgetHome.currentTrack);
                 };
                 WidgetHome.removeFromPlaylist = function (track) {
-                    console.log('removeFromPlaylist called-------------------------------');
-                    if (WidgetHome.playList) {
-                        var trackIndex = 0;
-                        WidgetHome.playList.some(function (val, index) {
-                            if ((val.url == track.url) && (trackIndex == 0)) {
-                                audioPlayer.removeFromPlaylist(index);
-                                trackIndex++;
-                            }
-                            return (val.url == track.url);
+                    Modals.removeTrackModal().then(function(data){
+                        if (WidgetHome.playList) {
+                            var trackIndex = 0;
+                            WidgetHome.playList.some(function (val, index) {
+                                if ((val.url == track.url) && (trackIndex == 0)) {
+                                    audioPlayer.removeFromPlaylist(index);
+                                    trackIndex++;
+                                }
+                                return (val.url == track.url);
 
-                        });
-                        console.log('indexes------------track Index----------------------track==========', trackIndex);
-                    }
+                            });
+                            console.log('indexes------------track Index----------------------track==========', trackIndex);
+                        }
+                        console.log('Remove caleedddddddddddddddddddd----------------------------------------',data);
+                    },function(err){
+                        console.log('Error--------------While removing-------------',err);
+                    });
+                    console.log('removeFromPlaylist called-------------------------------');
                 };
                 WidgetHome.removeTrackFromPlayList = function (index) {
-                    audioPlayer.removeFromPlaylist(index);
+                    Modals.removeTrackModal().then(function(data){
+                        audioPlayer.removeFromPlaylist(index);
+                        console.log('Remove caleedddddddddddddddddddd----------------------------------------',data);
+                    },function(err){
+                        console.log('Error--------------While removing-------------',err);
+                    });
                 };
                 WidgetHome.getFromPlaylist = function () {
                     var trackIndex = 0,
