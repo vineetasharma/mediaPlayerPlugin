@@ -71,15 +71,17 @@
                 <h4 class="margin-zero ellipsis whiteTheme">No Audio Currently Selected</h4>
             </div>
             <div class="slider">
-                <div class="playerMP">
-                    <div ng-if="WidgetHome.currentTime">{{WidgetHome.currentTime | secondsToDateTime |date: 'mm:ss'}}</div>
+                <div>
+
                     <div class="audio-plyer" ng-if="WidgetHome.currentTime && WidgetHome.duration"><input type="range"
                                                                                                           min="0.0"
                                                                                                           max="{{WidgetHome.duration}}"
                                                                                                           ng-model="WidgetHome.currentTime"
-                                                                                                          ng-change="WidgetHome.changeTime(WidgetHome.currentTime)"/>
+                                                                                                          ng-change="WidgetHome.changeTime(WidgetHome.currentTime)"
+                                                                                                          style="height:30px; border-radius:4px;background-color: transparent !important;"/>
                     </div>
-                    <div ng-if="WidgetHome.duration">{{WidgetHome.duration | secondsToDateTime | date: 'mm:ss'}}</div>
+                    <div ng-if="WidgetHome.currentTime" style="float:left">{{WidgetHome.currentTime | secondsToDateTime |date: 'mm:ss'}}</div>
+                    <div ng-if="WidgetHome.duration" style="float: right;">{{WidgetHome.duration | secondsToDateTime | date: 'mm:ss'}}</div>
                 </div>
                 <div class="volume">
                     &nbsp;<input class="volume-button rotate-270"
