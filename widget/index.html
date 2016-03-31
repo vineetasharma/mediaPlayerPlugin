@@ -80,8 +80,8 @@
                                                                                                           ng-change="WidgetHome.changeTime(WidgetHome.currentTime)"
                                                                                                           style="height:30px; border-radius:4px;background-color: transparent !important;"/>
                     </div>
-                    <div ng-if="WidgetHome.currentTime" style="float:left">{{WidgetHome.currentTime | secondsToDateTime |date: 'mm:ss'}}</div>
-                    <div ng-if="WidgetHome.duration" style="float: right;">{{WidgetHome.duration | secondsToDateTime | date: 'mm:ss'}}</div>
+                    <div ng-if="WidgetHome.currentTime" class="time-indicator" style="float:left">{{WidgetHome.currentTime | secondsToDateTime |date: 'mm:ss'}}</div>
+                    <div ng-if="WidgetHome.duration" class="time-indicator" style="float: right;">{{WidgetHome.duration | secondsToDateTime | date: 'mm:ss'}}</div>
                 </div>
                 <div class="volume">
                     &nbsp;<input class="volume-button rotate-270"
