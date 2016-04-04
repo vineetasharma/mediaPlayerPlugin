@@ -129,7 +129,7 @@
                                     <img ng-if="track.image" ng-src="{{track.image | cropImage : 55 :22}}">
                                 </div>
                                 <div class="list-item-copy text-left padding-left-ten padding-right-ten">
-                                    <p class="margin-bottom-zero ellipsis margin-top-twenty whiteTheme">{{track.title}}</p>
+                                    <p class="margin-bottom-zero ellipsis margin-top-twenty text-primary">{{track.title}}</p>
                                 </div>
                                 <div class="btns text-center">
                                     <a ng-class="track.playing ? 'icon-pause-circle primaryTheme' : 'icon-play-circle'" class="icon " ng-click="WidgetHome.playlistPlayPause(track)"></a>
