@@ -116,7 +116,7 @@
 
         <!-- Playlist Overlay -->
         <div ng-if="openPlaylist" class="overlay"
-             style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8);">
+             style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,1.0);">
             <div class="overlay-content" style="postiion:absolute; top:0; left:0; height:100%; width: 100%; overflow:auto;">
                 <div class="media-player-list-layout layout3">
                     <div class="list-layout has-btns">
@@ -129,10 +129,10 @@
                                     <img ng-if="track.image" ng-src="{{track.image | cropImage : 55 :22}}">
                                 </div>
                                 <div class="list-item-copy text-left padding-left-ten padding-right-ten">
-                                    <p class="margin-bottom-zero ellipsis margin-top-twenty whiteTheme">{{track.title}}</p>
+                                    <p class="margin-bottom-zero ellipsis margin-top-twenty">{{track.title}}</p>
                                 </div>
                                 <div class="btns text-center">
-                                    <a ng-class="track.playing ? 'icon-pause-circle primaryTheme' : 'icon-play-circle'" class="icon whiteTheme " ng-click="WidgetHome.playlistPlayPause(track)"></a>
+                                    <a ng-class="track.playing ? 'icon-pause-circle' : 'icon-play-circle'" class="icon primaryTheme" ng-click="WidgetHome.playlistPlayPause(track)"></a>
                                 </div>
                                 <div class="remove-btn text-center dangerBackgroundTheme" style="background:red;" ng-click="WidgetHome.removeTrackFromPlayList($index)">
                                     <span class="whiteTheme">Remove</span>
