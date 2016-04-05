@@ -20,6 +20,16 @@
              */
             $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension|cdvfile|file):/);
 
+        }]).run(['$rootScope',function ($rootScope) {
+            buildfire.navigation.onBackButtonClick = function () {
+                console.log('Back Button called-----------------------------');
+                if ($rootScope.openPlaylist) {
+                    $rootScope.openPlaylist=false;
+                    $rootScope.$digest();
+                }
+                else
+                    buildfire.navigation._goBackOne();
+            }
         }]);
 })
 (window.angular, window.buildfire);

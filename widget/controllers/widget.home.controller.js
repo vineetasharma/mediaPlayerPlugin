@@ -10,6 +10,7 @@
                 var WidgetHome = this;
                 WidgetHome.currentTime = 0.0;
                 WidgetHome.volume = 1;
+                $rootScope.openPlaylist = false;
 
 
                 /**
@@ -192,7 +193,7 @@
                         }
                     });
                     WidgetHome.openMoreInfo = false;
-                    WidgetHome.openPlaylist = true;
+                    $rootScope.openPlaylist = true;
                 };
                 WidgetHome.changeTime = function (time) {
                     console.log('Change time method called---------------------------------', time);
@@ -228,7 +229,7 @@
                     WidgetHome.openSettings = false;
                 };
                 WidgetHome.closePlayListOverlay = function () {
-                    WidgetHome.openPlaylist = false;
+                    $rootScope.openPlaylist = false;
                 };
                 WidgetHome.closeMoreInfoOverlay = function () {
                     WidgetHome.openMoreInfo = false;
