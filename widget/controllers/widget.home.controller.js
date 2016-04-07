@@ -21,8 +21,6 @@
                 audioPlayer.getCurrentTrack(function (track, err) {
                     console.log('audioPlayer.getCurrentTrack method called--------------------------------', track, err);
                     if (track) {
-                        if(track.isPlaying)
-                            WidgetHome.playing = true;
                         WidgetHome.currentTrack = track;
                         $scope.$digest();
                     }
@@ -45,6 +43,9 @@
                     console.log('Audio Player On Event callback Method--------------------------------------', e);
                     switch (e.event) {
                         case 'timeUpdate':
+                            if(WidgetHome.settings  && WidgetHome.settings.isPlayingCurrentTrack && WidgetHome.currentTrack){
+                                WidgetHome.playing = true;
+                            }
                             WidgetHome.currentTime = e.data.currentTime;
                             WidgetHome.duration = e.data.duration;
                             break;
@@ -72,6 +73,10 @@
                  * Player related method and variables
                  */
                 WidgetHome.playTrack = function () {
+                    if(WidgetHome.settings){
+                        WidgetHome.settings.isPlayingCurrentTrack=true;
+                        audioPlayer.settings.set(WidgetHome.settings);
+                    }
                     WidgetHome.playing = true;
                     WidgetHome.currentTrack.isPlaying = true;
                     if (WidgetHome.paused) {
@@ -81,6 +86,10 @@
                     }
                 };
                 WidgetHome.playlistPlay = function (track) {
+                    if(WidgetHome.settings){
+                        WidgetHome.settings.isPlayingCurrentTrack=true;
+                        audioPlayer.settings.set(WidgetHome.settings);
+                    }
                     WidgetHome.currentTrack = track;
                     console.log('PlayList Play ---------------Track is played', track);
                     WidgetHome.playing = true;
@@ -91,12 +100,20 @@
                     WidgetHome.getFromPlaylist();
                 };
                 WidgetHome.pauseTrack = function () {
+                    if(WidgetHome.settings){
+                        WidgetHome.settings.isPlayingCurrentTrack=false;
+                        audioPlayer.settings.set(WidgetHome.settings);
+                    }
                     WidgetHome.playing = false;
                     WidgetHome.paused = true;
                     WidgetHome.currentTrack.isPlaying = false;
                     audioPlayer.pause();
                 };
                 WidgetHome.playlistPause = function (track) {
+                    if(WidgetHome.settings){
+                        WidgetHome.settings.isPlayingCurrentTrack=true;
+                        audioPlayer.settings.set(WidgetHome.settings);
+                    }
                     track.playing = false;
                     WidgetHome.playing = false;
                     WidgetHome.paused = true;
@@ -270,6 +287,7 @@
                     this.loopPlaylist = settings.loopPlaylist; // once the end of the playlist has been reached start over again
                     this.autoJumpToLastPosition = settings.autoJumpToLastPosition; //If a track has [lastPosition] use it to start playing the audio from there
                     this.shufflePlaylist = settings.shufflePlaylist;// shuffle the playlist
+                    this.isPlayingCurrentTrack = settings.isPlayingCurrentTrack;// Tells whether current is playing or not
                 }
 
 
