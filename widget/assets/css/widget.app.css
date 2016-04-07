@@ -705,3 +705,15 @@ input.volume-button[type=range]:focus::-ms-fill-upper {
 	margin-top: -25px !important;
 	opacity: 0.6 !important;
 }
+
+
+/* Modal */
+.modal{
+	background:rgba(0,0,0,0.8);
+}
+.modal .modal-dialog{
+	position:relative;
+	top:40%;
+	transform:translateY(-50%) !important;
+	margin:0 15px !important;
+}
