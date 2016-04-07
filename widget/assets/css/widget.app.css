@@ -709,6 +709,7 @@ input.volume-button[type=range]:focus::-ms-fill-upper {
 
 /* Modal */
 .modal{
+	height:100%;
 	background:rgba(0,0,0,0.8);
 }
 .modal .modal-dialog{
