@@ -57,9 +57,9 @@
                 <div class="media-inner text-center">
                     <img ng-if="!WidgetHome.currentTrack.image"
                          class="border-radius-two"
-                         src="assets/images/now-playing.png" height="260px" width="260px">
+                         src='../../../styles/media/holder-1x1.png' height="260px" width="260px">
                     <img ng-if="WidgetHome.currentTrack.image" class="border-radius-two"
-                         ng-src="{{WidgetHome.currentTrack.image | cropImage : 260:260}}">
+                         load-image="1x1" data-final-src="{{WidgetHome.currentTrack.image | cropImage : 260:260}}">
                 </div>
             </div>
             <div class="media-player-info margin-top-twenty padding-left-ten padding-right-ten"
@@ -139,7 +139,10 @@
                              ng-repeat="track in WidgetHome.playList">
                             <div class="list-item-media text-left" ng-class="{'edit' : track.swiped}">
                                 <div class="list-media-holder square-icon pull-left">
-                                    <img ng-if="track.image" ng-src="{{track.image | cropImage : 55 :22}}">
+                                    <img ng-if="track.image" load-image="2x1"
+                                         data-final-src="{{track.image | cropImage : 55 :22}}">
+                                    <img ng-if="!track.image"
+                                         src='../../../styles/media/holder-2x1.png'>
                                 </div>
                                 <div class="list-item-copy text-left padding-left-ten padding-right-ten">
                                     <p class="margin-bottom-zero ellipsis margin-top-twenty bodyTextTheme">{{track.title}}</p>
