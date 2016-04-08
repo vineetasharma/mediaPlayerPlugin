@@ -45,6 +45,29 @@
                         case 'timeUpdate':
                             if(WidgetHome.settings  && WidgetHome.settings.isPlayingCurrentTrack && WidgetHome.currentTrack){
                                 WidgetHome.playing = true;
+                            }else{
+                                audioPlayer.getCurrentTrack(function (track, err) {
+                                    console.log('audioPlayer.getCurrentTrack method called- from timeupdate event-------------------------------', track, err);
+                                    if (track) {
+                                        audioPlayer.settings.get(function (err, data) {
+                                            console.log('Got settings - from --timeupdate event-------------------', err, data);
+                                            if (data) {
+                                                WidgetHome.settings = data;
+                                                if(data.isPlayingCurrentTrack){
+                                                    WidgetHome.playing = true;
+                                                }
+                                            }
+                                            else{
+                                                var newSettings=new AudioSettings({autoPlayNext:false,loopPlaylist:false,autoJumpToLastPosition:false,shufflePlaylist:false,isPlayingCurrentTrack:true});
+                                                WidgetHome.settings=newSettings;
+                                                audioPlayer.settings.set(newSettings);
+                                                WidgetHome.playing = true;
+                                            }
+                                        });
+                                        WidgetHome.currentTrack = track;
+                                        $scope.$digest();
+                                    }
+                                });
                             }
                             WidgetHome.currentTime = e.data.currentTime;
                             WidgetHome.duration = e.data.duration;
