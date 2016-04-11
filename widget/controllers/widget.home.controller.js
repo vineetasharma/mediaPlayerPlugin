@@ -43,9 +43,9 @@
                     console.log('Audio Player On Event callback Method--------------------------------------', e);
                     switch (e.event) {
                         case 'timeUpdate':
-                            if(WidgetHome.settings  && WidgetHome.settings.isPlayingCurrentTrack && WidgetHome.currentTrack){
+                            if (WidgetHome.settings && WidgetHome.settings.isPlayingCurrentTrack && WidgetHome.currentTrack) {
                                 WidgetHome.playing = true;
-                            }else{
+                            } else {
                                 audioPlayer.getCurrentTrack(function (track, err) {
                                     console.log('audioPlayer.getCurrentTrack method called- from timeupdate event-------------------------------', track, err);
                                     if (track) {
@@ -53,16 +53,16 @@
                                             console.log('Got settings - from --timeupdate event-------------------', err, data);
                                             if (data) {
                                                 WidgetHome.settings = data;
-                                                if(data.isPlayingCurrentTrack){
+                                                if (data.isPlayingCurrentTrack) {
                                                     WidgetHome.playing = true;
                                                 }
                                             }
                                             /*else{
-                                                var newSettings=new AudioSettings({autoPlayNext:false,loopPlaylist:false,autoJumpToLastPosition:false,shufflePlaylist:false,isPlayingCurrentTrack:true});
-                                                WidgetHome.settings=newSettings;
-                                                audioPlayer.settings.set(newSettings);
-                                                WidgetHome.playing = true;
-                                            }*/
+                                             var newSettings=new AudioSettings({autoPlayNext:false,loopPlaylist:false,autoJumpToLastPosition:false,shufflePlaylist:false,isPlayingCurrentTrack:true});
+                                             WidgetHome.settings=newSettings;
+                                             audioPlayer.settings.set(newSettings);
+                                             WidgetHome.playing = true;
+                                             }*/
                                         });
                                         WidgetHome.currentTrack = track;
                                         $scope.$digest();
@@ -78,8 +78,8 @@
                             break;
                         case 'pause':
                             WidgetHome.playing = false;
-                            WidgetHome.settings.isPlayingCurrentTrack=false;
-                            console.log('Time Update event- pause---------------isPlayingTrack---------',WidgetHome.settings.isPlayingCurrentTrack, e.event);
+                            WidgetHome.settings.isPlayingCurrentTrack = false;
+                            console.log('Time Update event- pause---------------isPlayingTrack---------', WidgetHome.settings.isPlayingCurrentTrack, e.event);
                             break;
                         case 'next':
                             WidgetHome.currentTrack = e.data.track;
@@ -98,8 +98,8 @@
                  * Player related method and variables
                  */
                 WidgetHome.playTrack = function () {
-                    if(WidgetHome.settings){
-                        WidgetHome.settings.isPlayingCurrentTrack=true;
+                    if (WidgetHome.settings) {
+                        WidgetHome.settings.isPlayingCurrentTrack = true;
                         audioPlayer.settings.set(WidgetHome.settings);
                     }
                     WidgetHome.playing = true;
@@ -111,8 +111,8 @@
                     }
                 };
                 WidgetHome.playlistPlay = function (track) {
-                    if(WidgetHome.settings){
-                        WidgetHome.settings.isPlayingCurrentTrack=true;
+                    if (WidgetHome.settings) {
+                        WidgetHome.settings.isPlayingCurrentTrack = true;
                         audioPlayer.settings.set(WidgetHome.settings);
                     }
                     WidgetHome.currentTrack = track;
@@ -125,8 +125,8 @@
                     WidgetHome.getFromPlaylist();
                 };
                 WidgetHome.pauseTrack = function () {
-                    if(WidgetHome.settings){
-                        WidgetHome.settings.isPlayingCurrentTrack=false;
+                    if (WidgetHome.settings) {
+                        WidgetHome.settings.isPlayingCurrentTrack = false;
                         audioPlayer.settings.set(WidgetHome.settings);
                     }
                     WidgetHome.playing = false;
@@ -136,19 +136,19 @@
                 };
                 WidgetHome.playlistPause = function (track) {
                     WidgetHome.playing = false;
-                    if(WidgetHome.settings){
-                        WidgetHome.settings.isPlayingCurrentTrack=false;
+                    if (WidgetHome.settings) {
+                        WidgetHome.settings.isPlayingCurrentTrack = false;
                         audioPlayer.settings.set(WidgetHome.settings);
                     }
                     track.playing = false;
-                    $timeout(function(){
+                    $timeout(function () {
                         $scope.$apply(function () {
                             WidgetHome.playing = false;
                             WidgetHome.currentTrack.isPlaying = false;
-                            console.log('$timerout ----------------',WidgetHome.playing);
+                            console.log('$timerout ----------------', WidgetHome.playing);
                         });
                     });
-                    console.log('WidgetHome.playing----------------------------------------------',WidgetHome.playing);
+                    console.log('WidgetHome.playing----------------------------------------------', WidgetHome.playing);
                     WidgetHome.paused = true;
                     audioPlayer.pause();
                 };
@@ -235,7 +235,7 @@
                             WidgetHome.playList = data.tracks;
                             if (WidgetHome.playing) {
                                 WidgetHome.playList.some(function (track) {
-                                    if ((track.url == WidgetHome.currentTrack.url) && (trackIndex==0)) {
+                                    if ((track.url == WidgetHome.currentTrack.url) && (trackIndex == 0)) {
                                         trackIndex++;
                                         console.log('Url MAtched--------------------------------- --------------');
                                         track.playing = true;
@@ -327,13 +327,34 @@
 
 
                 WidgetHome.playlistPlayPause = function (track) {
-                    if (track.playing)
-                    {
-                        WidgetHome.playlistPause(track);
+                    if (WidgetHome.playing) {
+                        if (track.playing) {
+                            WidgetHome.playlistPause(track);
+                        }
+                        else {
+                            WidgetHome.playlistPlay(track);
+                        }
                     }
-                    else{
+                    else if (WidgetHome.paused) {
+                        if (track.url == WidgetHome.currentTrack.url) {
+                            WidgetHome.settings.isPlayingCurrentTrack = true;
+                            WidgetHome.playing = true;
+                            track.playing = true;
+                            audioPlayer.play();
+                        }
+                        else {
+                            WidgetHome.playlistPlay(track);
+                        }
+                    }
+                    else {
                         WidgetHome.playlistPlay(track);
                     }
+                    /*if (track.playing) {
+                     WidgetHome.playlistPause(track);
+                     }
+                     else {
+                     WidgetHome.playlistPlay(track);
+                     }*/
                 };
 
             }]);
