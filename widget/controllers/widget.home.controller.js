@@ -110,7 +110,7 @@
                         audioPlayer.play(WidgetHome.currentTrack);
                     }
                 };
-                WidgetHome.playlistPlay = function (track) {
+                WidgetHome.playlistPlay = function (track, index) {
                     if (WidgetHome.settings) {
                         WidgetHome.settings.isPlayingCurrentTrack = true;
                         audioPlayer.settings.set(WidgetHome.settings);
@@ -120,6 +120,14 @@
                     WidgetHome.playing = true;
                     if (track) {
                         audioPlayer.play(track);
+                        angular.forEach(WidgetHome.playlist, function (value, ind) {
+                            if (index == ind) {
+                                value.playing = true;
+                            }
+                            else {
+                                value.playing = false;
+                            }
+                        });
                         track.playing = true;
                     }
                     WidgetHome.getFromPlaylist();
@@ -147,6 +155,9 @@
                             WidgetHome.currentTrack.isPlaying = false;
                             console.log('$timerout ----------------', WidgetHome.playing);
                         });
+                    });
+                    angular.forEach(WidgetHome.playlist, function (value, ind) {
+                        value.playing = false;
                     });
                     console.log('WidgetHome.playing----------------------------------------------', WidgetHome.playing);
                     WidgetHome.paused = true;
@@ -326,13 +337,13 @@
                 }
 
 
-                WidgetHome.playlistPlayPause = function (track) {
+                WidgetHome.playlistPlayPause = function (track, index) {
                     if (WidgetHome.playing) {
                         if (track.playing) {
                             WidgetHome.playlistPause(track);
                         }
                         else {
-                            WidgetHome.playlistPlay(track);
+                            WidgetHome.playlistPlay(track,index);
                         }
                     }
                     else if (WidgetHome.paused) {
@@ -340,14 +351,15 @@
                             WidgetHome.settings.isPlayingCurrentTrack = true;
                             WidgetHome.playing = true;
                             track.playing = true;
+                            WidgetHome.playList
                             audioPlayer.play();
                         }
                         else {
-                            WidgetHome.playlistPlay(track);
+                            WidgetHome.playlistPlay(track,index);
                         }
                     }
                     else {
-                        WidgetHome.playlistPlay(track);
+                        WidgetHome.playlistPlay(track,index);
                     }
                     /*if (track.playing) {
                      WidgetHome.playlistPause(track);

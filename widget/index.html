@@ -152,7 +152,7 @@
                                 </div>
                                 <div class="btns text-center">
                                     <a ng-class="track.playing ? 'icon-pause-circle' : 'icon-play-circle'"
-                                       class="icon primaryTheme" ng-click="WidgetHome.playlistPlayPause(track)"></a>
+                                       class="icon primaryTheme" ng-click="WidgetHome.playlistPlayPause(track,$index)"></a>
                                 </div>
                                 <div class="remove-btn text-center dangerBackgroundTheme" style="background:red;"
                                      ng-click="WidgetHome.removeTrackFromPlayList($index)">
