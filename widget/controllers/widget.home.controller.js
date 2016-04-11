@@ -57,12 +57,12 @@
                                                     WidgetHome.playing = true;
                                                 }
                                             }
-                                            else{
+                                            /*else{
                                                 var newSettings=new AudioSettings({autoPlayNext:false,loopPlaylist:false,autoJumpToLastPosition:false,shufflePlaylist:false,isPlayingCurrentTrack:true});
                                                 WidgetHome.settings=newSettings;
                                                 audioPlayer.settings.set(newSettings);
                                                 WidgetHome.playing = true;
-                                            }
+                                            }*/
                                         });
                                         WidgetHome.currentTrack = track;
                                         $scope.$digest();
@@ -78,6 +78,8 @@
                             break;
                         case 'pause':
                             WidgetHome.playing = false;
+                            WidgetHome.settings.isPlayingCurrentTrack=false;
+                            console.log('Time Update event- pause---------------isPlayingTrack---------',WidgetHome.settings.isPlayingCurrentTrack, e.event);
                             break;
                         case 'next':
                             WidgetHome.currentTrack = e.data.track;
@@ -133,12 +135,20 @@
                     audioPlayer.pause();
                 };
                 WidgetHome.playlistPause = function (track) {
+                    WidgetHome.playing = false;
                     if(WidgetHome.settings){
-                        WidgetHome.settings.isPlayingCurrentTrack=true;
+                        WidgetHome.settings.isPlayingCurrentTrack=false;
                         audioPlayer.settings.set(WidgetHome.settings);
                     }
                     track.playing = false;
-                    WidgetHome.playing = false;
+                    $timeout(function(){
+                        $scope.$apply(function () {
+                            WidgetHome.playing = false;
+                            WidgetHome.currentTrack.isPlaying = false;
+                            console.log('$timerout ----------------',WidgetHome.playing);
+                        });
+                    });
+                    console.log('WidgetHome.playing----------------------------------------------',WidgetHome.playing);
                     WidgetHome.paused = true;
                     audioPlayer.pause();
                 };
@@ -195,7 +205,7 @@
                             WidgetHome.playList.some(function (val, index) {
                                 if ((val.url == track.url) && (trackIndex == 0)) {
                                     audioPlayer.removeFromPlaylist(index);
-                                    trackIndex++;
+                                    //trackIndex++;
                                 }
                                 return (val.url == track.url);
 
@@ -225,7 +235,9 @@
                             WidgetHome.playList = data.tracks;
                             if (WidgetHome.playing) {
                                 WidgetHome.playList.some(function (track) {
-                                    if (track.url == WidgetHome.currentTrack.url) {
+                                    if ((track.url == WidgetHome.currentTrack.url) && (trackIndex==0)) {
+                                        trackIndex++;
+                                        console.log('Url MAtched--------------------------------- --------------');
                                         track.playing = true;
                                         return true;
                                     }
@@ -316,9 +328,12 @@
 
                 WidgetHome.playlistPlayPause = function (track) {
                     if (track.playing)
+                    {
                         WidgetHome.playlistPause(track);
-                    else
+                    }
+                    else{
                         WidgetHome.playlistPlay(track);
+                    }
                 };
 
             }]);
