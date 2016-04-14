@@ -32,7 +32,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div ng-controller="WidgetHomeCtrl as WidgetHome">
+<div ng-controller="WidgetHomeCtrl as WidgetHome" ng-cloak>
     <div class="holder now-playing text-center">
         <div ng-style="{'background':'url(' + (WidgetHome.currentTrack.image ? WidgetHome.currentTrack.image : 'assets/images/now-playing.png') + ') no-repeat center center',
          '-o-filter': 'blur(10px) brightness(0.2)',
@@ -285,5 +285,8 @@
         </div>
     </div>
 </div>
+<div ng-if="!WidgetHome">
+    <h5 class="titleBarTheme text-center" style="margin-top: 35px;">Something went wrong!! Please try again</h5>
+    </div>
 </body>
 </html>
