@@ -520,11 +520,3 @@ html[browser="Firefox"] .layout3 .list-layout .list-item-media .list-media-holde
 	margin-left:-12px;
 	margin-top:-12px;
 }
-
-/*Style to fix the audio player ui*/
-.audio-player{
-	overflow: hidden !important;
-	position: fixed;
-	width: 100%;
-	height: 100%;
-}

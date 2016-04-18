@@ -718,3 +718,10 @@ input.volume-button[type=range]:focus::-ms-fill-upper {
 	transform:translateY(-50%) !important;
 	margin:0 15px !important;
 }
+/*Style to fix the audio player ui*/
+.audio-player{
+	overflow: hidden !important;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
