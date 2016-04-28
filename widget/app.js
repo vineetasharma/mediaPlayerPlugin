@@ -37,15 +37,14 @@
         };
       }])
       .run(['$rootScope',function ($rootScope) {
-            buildfire.navigation.onBackButtonClick = function () {
-                console.log('Back Button called-----------------------------');
+            buildfire.history.onPop(function(data, err){
+                console.log('buildfire.history.onPop----------------------------',data,'Error------------------',err);
+
                 if ($rootScope.openPlaylist) {
                     $rootScope.openPlaylist=false;
                     $rootScope.$digest();
                 }
-                else
-                    buildfire.navigation._goBackOne();
-            }
+            });
         }]);
 })
 (window.angular, window.buildfire);

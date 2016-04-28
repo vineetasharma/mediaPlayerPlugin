@@ -259,6 +259,7 @@
                     });
                     WidgetHome.openMoreInfo = false;
                     $rootScope.openPlaylist = true;
+                    Buildfire.history.push('Playlist', { elementToShow: 'Playlist'});
                 };
                 WidgetHome.changeTime = function (time) {
                     console.log('Change time method called---------------------------------', time);
@@ -294,7 +295,8 @@
                     WidgetHome.openSettings = false;
                 };
                 WidgetHome.closePlayListOverlay = function () {
-                    $rootScope.openPlaylist = false;
+                    Buildfire.history.pop();
+                    //$rootScope.openPlaylist = false;
                 };
                 WidgetHome.closeMoreInfoOverlay = function () {
                     WidgetHome.openMoreInfo = false;
