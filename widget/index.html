@@ -34,7 +34,7 @@
 <body>
 <div ng-controller="WidgetHomeCtrl as WidgetHome">
     <div class="holder now-playing text-center audio-player" ng-cloak>
-        <div ng-style="{'background':'url(' + (WidgetHome.currentTrack.image ? WidgetHome.currentTrack.image : 'assets/images/now-playing.png') + ') no-repeat center center',
+        <div ng-style="{'background':'url(' + (WidgetHome.currentTrack.image ? WidgetHome.currentTrack.image : 'http://app.buildfire.com/app/media/now-playing.png') + ') no-repeat center center',
          '-o-filter': 'blur(10px) brightness(0.2)',
     '-moz-filter': 'blur(10px) brightness(0.2)',
     '-webkit-filter': 'blur(10px) brightness(0.2)',
@@ -57,7 +57,7 @@
                 <div class="media-inner text-center">
                     <img ng-if="!WidgetHome.currentTrack.image"
                          class="border-radius-two"
-                         src='assets/images/now-playing.png' height="260px" width="260px">
+                         src='http://app.buildfire.com/app/media/now-playing.png' height="260px" width="260px">
                     <img ng-if="WidgetHome.currentTrack.image" class="border-radius-two"
                          load-image="1x1" data-final-src="{{WidgetHome.currentTrack.image | cropImage : 260:260}}">
                 </div>
