@@ -49,7 +49,7 @@
     'height': '110%',
     'width': '110%',
     'z-index': '0'}"></div>
-        <div class="media-center-plugin" ng-if="!openPlaylist">
+        <div class="media-center-plugin" ng-if="!(WidgetHome.openMoreInfo || WidgetHome.openSettings)">
             <div class="media-header-link">
                 <a class="whiteTheme" ng-click="WidgetHome.getFromPlaylist()">Open Playlist</a>
             </div>
@@ -173,7 +173,7 @@
 
         <!-- More Info Overlay -->
         <div ng-if="WidgetHome.openMoreInfo" class="overlay"
-             style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8);">
+             style="position:fixed; top:0; left:0; width:100%; height:100%;">
             <div class="overlay-content"
                  style="postiion:absolute; top:0; left:0; height:100%; width: 100%; overflow:auto;">
                 <div class="media-player-more-info">
@@ -221,7 +221,7 @@
 
         <!-- Settings Overlay -->
         <div ng-if="WidgetHome.openSettings" class="overlay"
-             style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8);">
+             style="position:fixed; top:0; left:0; width:100%; height:100%;">
             <div class="overlay-content"
                  style="postiion:absolute; top:0; left:0; height:100%; width: 100%; overflow:auto;">
                 <div class="media-player-settings">
